@@ -7,7 +7,7 @@ Able to download all files from a courses and save them in created directory nam
 *Recently Integrated with my Discord Bot*
 
 **Next Steps:**
-+ Ability to search for course instead of manually key entry [x]
++ [x] Ability to search for course instead of manually key entry
 + Live Update Notification when professors post assignments
 + Ability to submit assignments
 
