@@ -8,8 +8,8 @@ Able to download all files from a courses and save them in created directory nam
 
 **Next Steps:**
 + [x] Ability to search for course instead of manually key entry
-+ Live Update Notification when professors post assignments
-+ Ability to submit assignments
++ [ ] Live Update Notification when professors post assignments
++ [ ] Ability to submit assignments
 
 **Screenshot:**
 
