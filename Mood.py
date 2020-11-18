@@ -1,6 +1,7 @@
 import requests
 from bs4 import BeautifulSoup as bs
 import os
+import re
 
 current_data_keys = {"C364": "32127", "C438": "32126", "C456": "32123"}
 pass_data_keys = {"C258": "23594", "C312": "30179", "C334": "30176", "C341": "30173", "C353": "28314", "C360": "25905", "C420": "25901", "C439": "28309"} 
@@ -20,12 +21,23 @@ class Moodle:
         self.session = requests.Session()
         self.session.get(moodle_url)
         self.course_title = ''
+        self.dictCourseSel = {}
         r = self.session.get(login_page)
         if r.status_code == 200:
             print("Successful Login")
         else:
             print("Failed Login")
-
+    
+    def gatherAllCourses(self):
+        course_details_prof = self.session.get(profile_link)
+        soup = bs(course_details_prof.text, 'html.parser')
+        r = soup.find(string='Course profiles').find_parent('li')
+        a_Attribs = r.findAll('a')
+        for elem in a_Attribs:
+            m = re.search('(?<=course=).*(?=&)', str(elem))
+            val = m.group(0)
+            self.dictCourseSel[elem.text] = val
+    
     def findCourses(self, courseKey):
         course_link = course_base_link + courseKey
         courseUnparsed = self.session.get(course_link)
