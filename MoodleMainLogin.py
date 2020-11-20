@@ -86,6 +86,7 @@ class Ui_MoodleDownloader(object):
         self.DownloadButton.setGeometry(QtCore.QRect(525, 380, 121, 23))
         self.DownloadButton.setIconSize(QtCore.QSize(16, 16))
         self.DownloadButton.setObjectName("DownloadButton")
+        self.DownloadButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.DownloadButton.clicked.connect(self.downloadFiles)
         self.progressBar = QtWidgets.QProgressBar(self.frame2)
         self.progressBar.setGeometry(QtCore.QRect(40, 520, 681, 21))
@@ -110,6 +111,7 @@ class Ui_MoodleDownloader(object):
         self.DownloadButton_2.setGeometry(QtCore.QRect(650, 320, 51, 23))
         self.DownloadButton_2.setIconSize(QtCore.QSize(16, 16))
         self.DownloadButton_2.setObjectName("DownloadButton_2")
+        self.DownloadButton_2.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
         self.DownloadButton_2.clicked.connect(self.selectDlLocation)
         self.label = QtWidgets.QLabel(self.frame2)
         self.label.setGeometry(QtCore.QRect(470, 112, 231, 181))
@@ -126,6 +128,7 @@ class Ui_MoodleDownloader(object):
 
     def retranslateUi(self, MoodleDownloader):
         _translate = QtCore.QCoreApplication.translate
+        MoodleDownloader.setWindowIcon(QtGui.QIcon('sberry.ico')) 
         MoodleDownloader.setWindowTitle(_translate("MoodleDownloader", "Moodle Downloader"))
         self.lineEdit.setPlaceholderText(_translate("MoodleDownloader", "Username"))
         self.lineEdit_2.setPlaceholderText(_translate("MoodleDownloader", "Password"))
@@ -136,21 +139,41 @@ class Ui_MoodleDownloader(object):
         self.checkBox_2.setText(_translate("MoodleDownloader", "Uncheck All"))
         self.lineEdit3.setText(_translate("MoodleDownloader", "C:/"))
         self.DownloadButton_2.setText(_translate("MoodleDownloader", "Change"))
-        
+    
+    def everythingWait(self):
+        self.frame.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+        self.label.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+        self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+        self.lineEdit.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+        self.lineEdit_2.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+    
+    def everythingBack(self):
+        self.frame.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.label.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.centralwidget.setCursor(QtGui.QCursor(QtCore.Qt.ArrowCursor))
+        self.lineEdit.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
+        self.lineEdit_2.setCursor(QtGui.QCursor(QtCore.Qt.IBeamCursor))
+        self.pushButton.setCursor(QtGui.QCursor(QtCore.Qt.PointingHandCursor))
 
-    def login(self):
+
+    def login(self, MoodleDownloader):
+        self.everythingWait()
         self.instant = Mood.Moodle()
         flag = self.instant.login(self.lineEdit.text(), self.lineEdit_2.text())
         if flag:
             self.frame.hide()
             self.frame2.show()
             self.load_courses()
+            self.everythingBack()
         else:
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('Login Failed')
+            msg.setWindowIcon(QtGui.QIcon('sberry.ico')) 
             msg.setText('Moodle has refused your login.\nPlease make sure your information is correct.')
             msg.setIcon(QtWidgets.QMessageBox.Warning)
             msg.exec_()
+            self.everythingBack()
 
 
     def load_courses(self):
@@ -204,6 +227,7 @@ class Ui_MoodleDownloader(object):
         if self.dir_path == 'C:/' or self.dir_path == '':
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('No Directory Path Set')
+            msg.setWindowIcon(QtGui.QIcon('sberry.ico')) 
             msg.setText('Please click "Change" and set your Download Location.')
             msg.setIcon(QtWidgets.QMessageBox.Warning)
             msg.exec_()
@@ -212,11 +236,11 @@ class Ui_MoodleDownloader(object):
         for num in range(0, self.numOfCourses):
             item = self.listWidget.item(num)
             if item.checkState() == 2:
-                print(item)
                 self.checkedNumList.append(num)
         if self.checkedNumList == []:
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('No Courses Selected')
+            msg.setWindowIcon(QtGui.QIcon('sberry.ico')) 
             msg.setText('Please check at least one course to Download.')
             msg.setIcon(QtWidgets.QMessageBox.Warning)
             msg.exec_()
@@ -233,7 +257,6 @@ class Ui_MoodleDownloader(object):
             self.instant.downloadFiles(x)
             self.progressBar.setProperty("value", 100/(updatedLen))
             updatedLen = updatedLen - 1
-        print('Went Through')
 
 
 import resources_rc
