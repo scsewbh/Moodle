@@ -10,6 +10,7 @@ Able to download all files from a courses and save them in created directory nam
 + [x] Ability to search for course instead of manually key entry
 + [x] Ability to Download All Course Teaching Files
 + [x] Build GUI for Downloader
++ [ ] Change Download Process to Background (Multithreading)
 + [ ] Live Update Notification when professors post assignments
 + [ ] Ability to submit assignments
 
