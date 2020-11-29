@@ -17,4 +17,10 @@ Able to download all files from a courses and save them in created directory nam
 
 **Screenshot:**
 
-![Alt text](Screenshots/downloaded.PNG "Downloaded Moodle Files")
+Here is the login page on the application:
+
+![Alt text](Screenshots/MDLoginPage.PNG "Moodle Login for Downloader")
+
+After logging in, you will be presented with a checklist of all courses you have taken using Moodle. You must select the courses you want to download and then select a location for the download to be save:
+
+![Alt text](Screenshots/MDDownloadPage.PNG "Moodle Download Page")
