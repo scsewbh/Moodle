@@ -224,6 +224,7 @@ class Ui_MoodleDownloader(object):
             item.setCheckState(QtCore.Qt.Unchecked)
 
     def downloadFiles(self):
+        self.progressBar.setProperty("value", 0)
         if self.dir_path == 'C:/' or self.dir_path == '':
             msg = QtWidgets.QMessageBox()
             msg.setWindowTitle('No Directory Path Set')
