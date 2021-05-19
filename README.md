@@ -13,6 +13,7 @@ Able to download all files from a courses and save them in created directory nam
 + [ ] Change Download Process to Background (Multithreading)
 + [ ] Live Update Notification when professors post assignments
 + [ ] Ability to submit assignments
++ [ ] Smoother GUI, universal application, ex. Electron, or Web Application
 
 
 **Screenshot:**
